@@ -14,6 +14,12 @@ export default function App() {
       ]))
   }
 
+  const deleteGoalHandler = (id) => {
+    setGoals(prevGoals => {
+      return prevGoals.filter( goal => id !== goal.id)
+    })
+  }
+
   return (
     <View style={styles.appContainer}>
       <GoalInput 
@@ -25,7 +31,8 @@ export default function App() {
           data={goals}
           renderItem={itemData => (
             <GoalItem 
-              text={itemData.item.text}
+              goal={itemData.item}
+              deleteGoal={deleteGoalHandler}
             />
           )}
           keyExtractor={(item, index) => {
